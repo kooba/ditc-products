@@ -1,0 +1,4 @@
+replicaCount: 2
+image:
+  tag: latest
+  name: jakubborys/ditc-products
