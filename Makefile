@@ -1,6 +1,8 @@
-TAG ?= dev
 CONTEXT ?= docker-for-desktop
 NAMESPACE ?= default
+TAG ?= $(shell git rev-parse HEAD)
+REF ?= $(shell git branch | grep \* | cut -d ' ' -f2)
+
 
 # Docker
 
@@ -31,3 +33,16 @@ install-chart:
 
 lint-chart:
 	helm lint charts/products --strict
+
+# Bridage
+
+install-brigade-deps:
+	yarn install
+
+lint-brigade:
+	./node_modules/.bin/eslint brigade.js
+
+run-brigade:
+	echo '{"name": "$(ENV_NAME)"}' > payload.json
+	brig run -c $(TAG) -r $(REF) -f brigade.js -p payload.json \
+	kooba/ditc-products --kube-context $(CONTEXT) --namespace brigade
