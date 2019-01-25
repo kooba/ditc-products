@@ -7,7 +7,7 @@ COPY config.yml /var/nameko/config.yml
 WORKDIR /var/nameko/
 
 RUN . /appenv/bin/activate; \
-    pip install --no-index -f wheelhouse ditc-products
+    pip install --no-index -f wheelhouse products
 
 RUN rm -rf /var/nameko/wheelhouse
 

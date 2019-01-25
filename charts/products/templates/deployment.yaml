@@ -32,7 +32,7 @@ spec:
                 name: redis
                 key: redis-password
           - name: RABBIT_HOST
-            value: broker-rabbitmq
+            value: rabbitmq
           - name: RABBIT_MANAGEMENT_PORT
             value: "15672"
           - name: RABBIT_PORT
