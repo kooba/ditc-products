@@ -19,6 +19,17 @@ push-image:
 
 build: run-wheel-builder build-image push-image
 
+release:
+	git add .
+	git commit -m "Products Release $$(date)"
+	git push origin service-impl
+	$(MAKE) build
+	curl -XDELETE -H "Authorization: token $(GITHUB_TOKEN)" \
+	"https://api.github.com/repos/kooba/ditc-products/git/refs/tags/dev"
+	curl -XPOST -H "Authorization: token $(GITHUB_TOKEN)" \
+	"https://api.github.com/repos/kooba/ditc-products/git/refs" \
+	-d '{ "sha": "$(TAG)", "ref": "refs/tags/dev" }'
+
 # Kubernetes
 
 test-chart:
