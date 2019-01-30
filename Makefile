@@ -3,6 +3,8 @@ NAMESPACE ?= default
 TAG ?= $(shell git rev-parse HEAD)
 REF ?= $(shell git branch | grep \* | cut -d ' ' -f2)
 
+# Set GitHub Auth Token and Webhook Shared Secret here
+GITHUB_TOKEN ?= ""
 
 # Docker
 
