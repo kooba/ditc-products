@@ -31,7 +31,7 @@ retag:
 release:
 	git add .
 	git commit -m "Products Release $$(date)"
-	git push origin service-impl
+	git push origin $(REF)
 	$(MAKE) build
 	$(MAKE) retag
 
